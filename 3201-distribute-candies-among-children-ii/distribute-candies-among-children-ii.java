@@ -1,13 +1,15 @@
 class Solution {
-    public long distributeCandies(int n, int limit) {
-        long ways = 0 ;
-
-        for(int i = 0 ; i <= limit && i <= n; i++){
-            long low = Math.max(0L,n-i-limit) ;
-            long high = Math.min(limit, n - i);
-            ways += 1L*Math.max(0L,high-low+1) ;
+    long C(long x) {
+        if (x < 2) {
+            return 0;
         }
-
-        return ways ;
+        return x * (x - 1) / 2;
+    }
+    public long distributeCandies(int n, int limit) {
+        return C(n + 2)
+                    - 3 * C(n - limit + 1)
+                    + 3 * C(n - 2L * limit)
+                    - C(n - 3L * limit - 1);
+        
     }
 }
