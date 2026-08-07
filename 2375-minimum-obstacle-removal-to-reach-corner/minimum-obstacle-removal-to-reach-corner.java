@@ -21,6 +21,8 @@ class Solution {
             int y = curr[1] ;
             int cst = curr[2] ;
 
+            if (cst > cost[x][y]) continue;
+
             if( x == m-1 && y == n-1 ) return cst ;
 
             for(int i = 0 ; i < 4 ; i++){
