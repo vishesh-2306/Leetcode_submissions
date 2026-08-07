@@ -4,8 +4,8 @@ class Solution {
         int n = grid[0].length ;
 
 
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> a[2]-b[2] ) ;
-        pq.offer(new int[]{0, 0, 0});
+        Deque<int[]> dq = new ArrayDeque<>() ;
+        dq.offer(new int[]{0, 0, 0});
 
         int[][] cost = new int[m][n] ;
         for (int[] row : cost) {
@@ -15,8 +15,8 @@ class Solution {
 
         int[][] dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
-        while(!pq.isEmpty()){
-            int[] curr = pq.remove() ;
+        while(!dq.isEmpty()){
+            int[] curr = dq.remove() ;
             int x = curr[0] ;
             int y = curr[1] ;
             int cst = curr[2] ;
@@ -35,7 +35,10 @@ class Solution {
 
                 if( cost[nx][ny] > newCst ){
                     cost[nx][ny] = newCst ;
-                    pq.add(new int[]{nx,ny,newCst}) ;
+                    
+                    if (grid[nx][ny] == 1 ) dq.offerLast(new int[]{nx,ny,newCst}) ;
+                    else dq.offerFirst(new int[]{nx,ny,newCst}) ;
+
                 }
 
             }
