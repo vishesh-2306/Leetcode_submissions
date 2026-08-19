@@ -1,6 +1,6 @@
 class Solution {
     public int maxNumberOfFamilies(int n, int[][] res) {
-        Arrays.sort(res,(a,b) -> Integer.compare(a[0],b[0])) ;
+        
 
         HashMap<Integer,TreeSet<Integer>> map = new HashMap<>() ;
         Set<Integer> s1 = new HashSet<>(Arrays.asList(2, 3, 4, 5));
