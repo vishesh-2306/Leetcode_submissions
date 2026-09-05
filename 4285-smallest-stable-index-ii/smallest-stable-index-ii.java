@@ -1,24 +1,21 @@
 class Solution {
     public int firstStableIndex(int[] nums, int k) {
-        int max = 0 ;
-        Deque<Integer> q = new ArrayDeque<>() ;
-        for(int i = 0 ; i < nums.length ; i++){
-            while( !q.isEmpty() && nums[q.peekLast()] > nums[i] ) q.pollLast() ;
+        int n = nums.length ;
+        int[] suf = new int[n];
+        suf[n - 1] = nums[n - 1];
 
-            q.addLast(i) ;
+        for (int i = n - 2; i >= 0; i--)
+            suf[i] = Math.min(nums[i], suf[i + 1]);
 
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            max = Math.max(max, nums[i]);
+
+            if (max - suf[i] <= k)
+                return i;
         }
 
-        for(int i = 0 ; i < nums.length ; i++){
-            max = Math.max(nums[i],max) ;
-            while (!q.isEmpty() && q.peekFirst() < i) {
-                q.pollFirst();
-            }
-            
-            if( max - nums[q.peek()] <= k ) return i ;
-            
-        }
-
-        return -1 ;
+        return -1;
     }
 }
