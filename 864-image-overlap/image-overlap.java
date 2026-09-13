@@ -11,21 +11,24 @@ class Solution {
             }
         }
 
-        HashMap<String,Integer> map = new HashMap<>() ;
-        int max = 0 ;
-        for(int i = 0 ; i < l1.size() ; i++){
-            for(int j = 0 ; j < l2.size() ; j++){
-                int n1 = l1.get(i) ;
-                int x1 = n1/n ;
-                int y1 = n1%n ;
+        int[][] count = new int[2 * n - 1][2 * n - 1];
+        int max = 0;
 
-                int n2 = l2.get(j) ;
+        for(int n1 : l1){
+
+            int x1 = n1/n ;
+            int y1 = n1%n ;
+
+            for(int n2 : l2){
+
                 int x2 = n2/n ;
                 int y2 = n2%n ;
 
-                String key = (x1-x2) + " " + (y1-y2) ;
-                map.put(key,map.getOrDefault(key,0)+1) ;
-                max = Math.max(map.get(key),max) ;
+                int dx = x1 - x2 + n - 1;
+                int dy = y1 - y2 + n - 1;
+
+                count[dx][dy]++;
+                max = Math.max(max, count[dx][dy]);
             }
         }
 
