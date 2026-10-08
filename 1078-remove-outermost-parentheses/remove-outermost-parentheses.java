@@ -1,13 +1,5 @@
 class Solution {
-    private String str(int l,int r,char[] arr){
-        StringBuilder res = new StringBuilder() ;
-
-        for(int i = l ; i <= r ; i++ ){
-            res.append(arr[i]) ;
-        }
-
-        return res.toString() ;
-    }
+    
     public String removeOuterParentheses(String s) {
         char[] arr = s.toCharArray() ;
 
@@ -19,7 +11,7 @@ class Solution {
             if( arr[r] == '(' ) bal++ ;
             else if( arr[r] == ')' ) bal-- ;
             if( bal == 0 ){
-                ans.append(str(l+1,r-1,arr)) ;
+                ans.append(s.substring(l+1,r)) ;
                 l = r+1 ;
             }
         }
